@@ -24,7 +24,7 @@ import seq.larmor_pypulseq as larmor_pypulseq
 import seq.inversionRecovery as inversionRecovery
 import seq.noise as noise
 import seq.shimmingSweep as shimming
-import seq.sweepImage as sweep
+# import seq.sweepImage as sweep
 import seq.autoTuning as autoTuning
 import seq.localizer as localizer
 import seq.larmor_raw as larmor_raw
@@ -34,6 +34,7 @@ import seq.fix_gain as fix_gain
 import seq.mse_pp as mse_pp
 import seq.mse_pp_jma as mse_jma
 import seq.rare_t2prep_pp as rare_t2prep_pp
+import seq.tse_raph as tse_raph
 
 """
 Definition of default sequences
@@ -68,4 +69,5 @@ defaultsequences = {
     'MSE': mse.MSE(),
     'MSE_PyPulseq': mse_pp.MSE(),
     'Larmor PyPulseq': larmor_pypulseq.LarmorPyPulseq(),
+    'RTSE': tse_raph.TSE(),
 }

@@ -1,23 +1,3 @@
-"""
-@author: José Miguel Algarín Guisado
-@modifield: T. Guallart Naval, february 28th 2022
-MRILAB @ I3M
-"""
-import os
-import sys
-main_directory = os.path.dirname(os.path.realpath(__file__))
-parent_directory = os.path.dirname(main_directory)
-parent_directory = os.path.dirname(parent_directory)
-# Define the subdirectories you want to add to sys.path
-subdirs = ['MaRGE', 'marcos_client']
-
-# Add the subdirectories to sys.path
-for subdir in subdirs:
-    full_path = os.path.join(parent_directory, subdir)
-    sys.path.append(full_path)
-
-
-    
 import experiment as ex
 import numpy as np
 import seq.mriBlankSeq as blankSeq  # Import the mriBlankSequence for any new sequence.
@@ -26,14 +6,12 @@ import configs.hw_config as hw
 import configs.units as units
 from scipy.optimize import curve_fit
 
-
 class TSE(blankSeq.MRIBLANKSEQ):
     def __init__(self):
-        super(TSE, self).__init__()
-        # Input the parameters
+        super(TSE,  self).__init__()
         self.addParameter(key='seqName', string='TSEInfo', val='TSE')
         self.addParameter(key='nScans', string='Number of scans', val=1, field='SEQ')
-        self.addParameter(key='larmorFreq', string='Larmor frequency (MHz)', val=3.08, units=units.MHz, field='RF')
+        self.addParameter(key='larmorFreq', string='Larmor frequency (MHz)', val=16.5, units=units.MHz, field='RF')
         self.addParameter(key='rfExAmp', string='RF excitation amplitude (a.u.)', val=0.3, field='RF')
         self.addParameter(key='rfReAmp', string='RF refocusing amplitude (a.u.)', val=0.3, field='RF')
         self.addParameter(key='rfExTime', string='RF excitation time (us)', val=30.0, units=units.us, field='RF')
@@ -41,19 +19,17 @@ class TSE(blankSeq.MRIBLANKSEQ):
         self.addParameter(key='echoSpacing', string='Echo spacing (ms)', val=10.0, units=units.ms, field='SEQ')
         self.addParameter(key='repetitionTime', string='Repetition time (ms)', val=1000., units=units.ms, field='SEQ')
         self.addParameter(key='nPoints', string='Number of acquired points', val=60, field='IM')
-        self.addParameter(key='etl', string='Echo train length', val=50, field='SEQ')
+        self.addParameter(key='etl', string='Echo train length', val=5, field='SEQ')
         self.addParameter(key='acqTime', string='Acquisition time (ms)', val=2.0, units=units.ms, field='SEQ')
         self.addParameter(key='shimming', string='shimming', val=[0.0, 0.0, 0.0], units=units.sh, field='OTH')
         self.addParameter(key='echoObservation', string='Echo Observation', val=1, field='OTH')
-        self.addParameter(key='phase_mode', string='Phase mode', val='CPMG', tip='CP, CPMG, APCP, APCPMG', field='SEQ')
 
     def sequenceInfo(self):
         
-        print("CPMG")
-        print("Author: Dr. J.M. Algarín")
-        print("Contact: josalggui@i3m.upv.es")
-        print("mriLab @ i3M, CSIC, Spain")
-        print("This sequence runs an echo train with CPMG\n")
+        print("TSE")
+        print("Author: Raphael Trinkler")
+        print("Contact: raphael.trinkler@student.tugraz.at")
+        print("This sequence runs a Turbo Spin Echo")
 
     def sequenceTime(self):
         nScans = self.mapVals['nScans']
@@ -64,15 +40,6 @@ class TSE(blankSeq.MRIBLANKSEQ):
         init_gpa = False  # Starts the gpa
         self.demo = demo
 
-        # Check that self.phase_mode is once of the good values
-        phase_modes = ['CP', 'CPMG', 'APCP', 'APCPMG']
-        if not self.phase_mode in phase_modes:
-            print('ERROR: unexpected phase mode.')
-            print('ERROR: Please select one of possible modes:')
-            print('ERROR: CP\nCPMG\nAPCP\nAPCPMG')
-            return False
-
-        # I do not understand why I cannot create the input parameters automatically
         def createSequence():
             acq_points = 0
 
@@ -246,7 +213,7 @@ class TSE(blankSeq.MRIBLANKSEQ):
         te = self.mapVals['echoSpacing']
         acq_time = self.mapVals['acqTime']
         n_points = self.mapVals['nPoints'] * hw.oversamplingFactor
-        t2 = 10.0 # ms2
+        t2 = 10.0 # ms
         t2_star = 1.0 # ms
 
         # Define gaussian function
@@ -274,3 +241,4 @@ class TSE(blankSeq.MRIBLANKSEQ):
         signal = signal + (np.random.randn(np.size(signal)) + 1j * np.random.randn(np.size(signal))) * 0.01
 
         return signal
+    

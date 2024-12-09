@@ -297,7 +297,7 @@ class MRIBLANKSEQ:
               "It is recommended to overide this method into your sequence.")
 
     def sequenceTime(self):
-        rint("sequenceTime method is empty."
+        print("sequenceTime method is empty."
              "It is recommended to overide this method into your sequence.")
         return 0
 

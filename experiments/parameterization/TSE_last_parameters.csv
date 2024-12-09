@@ -1,0 +1,3 @@
+seqName,nScans,larmorFreq,rfExAmp,rfReAmp,rfExTime,rfReTime,echoSpacing,repetitionTime,nPoints,fov,dfov,etl,acqTime,shimming
+TSEInfo,Number of scans,Larmor frequency (MHz),RF excitation amplitude (a.u.),RF refocusing amplitude (a.u.),RF excitation time (us),RF refocusing time (us),Echo spacing (ms),Repetition time (ms),Number of acquired points,FOV (cm),dFOV (mm),Echo train length,Acquisition time (ms),shimming
+TSE,1,16.5,0.3,0.3,30.0,60.0,10.0,3000,60,"[4.0, 4.0, 4.0]","[0.0, 0.0, 0.0]",5,2.0,"[0.0, 0.0, 0.0]"

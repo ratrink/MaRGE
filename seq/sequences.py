@@ -24,7 +24,7 @@ import seq.larmor_pypulseq as larmor_pypulseq
 import seq.inversionRecovery as inversionRecovery
 import seq.noise as noise
 import seq.shimmingSweep as shimming
-# import seq.sweepImage as sweep
+import seq.sweepImage as sweep
 import seq.autoTuning as autoTuning
 import seq.localizer as localizer
 import seq.larmor_raw as larmor_raw

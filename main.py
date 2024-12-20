@@ -42,4 +42,4 @@ from controller.controller_session import SessionController
 app = QApplication(sys.argv)
 gui = SessionController()
 sys.exit(app.exec_())
-
+print("start")

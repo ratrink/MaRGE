@@ -51,14 +51,14 @@ class GRE3D(blankSeq.MRIBLANKSEQ):
         self.addParameter(key='rfExTime', string='RF excitation time (us)', val=30.0, units=units.us, field='RF')
         self.addParameter(key='echo_time', string='Echo time (ms)', val=4.0, units=units.ms, field='SEQ')
         self.addParameter(key='repetition_time', string='Repetition time (ms)', val=500., units=units.ms, field='SEQ')
-        self.addParameter(key='fov', string='FOV[x,y,z] (cm)', val=[15.0, 15.0, 15.0], units=units.cm, field='IM')
+        self.addParameter(key='fov', string='FOV[x,y,z] (cm)', val=[100.0, 100.0, 100.0], units=units.cm, field='IM')
         self.addParameter(key='dfov', string='dFOV[x,y,z] (mm)', val=[0.0, 0.0, 0.0], units=units.mm, field='IM',
                           tip="Position of the gradient isocenter")
-        self.addParameter(key='nPoints', string='nPoints (rd, ph, sl)', val=[60, 60, 2], field='IM')
+        self.addParameter(key='nPoints', string='nPoints (rd, ph, sl)', val=[100, 100, 10], field='IM')
         self.addParameter(key='angle', string='Angle (º)', val=0.0, field='IM')
         self.addParameter(key='rotationAxis', string='Rotation axis', val=[0, 0, 1], field='IM')
         self.addParameter(key='acq_time', string='Acquisition time (ms)', val=1.0, units=units.ms, field='SEQ')
-        self.addParameter(key='axesOrientation', string='Axes[rd,ph,sl]', val=[0, 1, 2], field='IM',
+        self.addParameter(key='axesOrientation', string='Axes[rd,ph,sl]', val=[2, 0, 1], field='IM',
                           tip="0=x, 1=y, 2=z")
         self.addParameter(key='axesEnable', string='Axes enable', val=[1, 1, 0],
                           tip="Use 0 for directions with matrix size 1, use 1 otherwise.")

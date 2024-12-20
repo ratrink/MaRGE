@@ -350,7 +350,7 @@ class HistoryListController(HistoryListWidget):
                             except:
                                 pass
                         if seq_name == 'RabiFlops':
-                            sequence.mapVals['shimming'] = defaultsequences['Shimming'].mapVals['shimming']
+                            sequence.mapVals['shimming'] = [0.0, 0.0, 0.0] # defaultsequences['Shimming'].mapVals['shimming']
 
                     # Run the sequence
                     key_index = keys.index(key)

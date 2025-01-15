@@ -734,6 +734,6 @@ if __name__ == "__main__":
 
     seq = MSE()
     seq.sequenceAtributes()
-    seq.sequenceRun(plotSeq=False, demo=True, standalone=True)
+    seq.sequenceRun(plotSeq=True, demo=True, standalone=True)
     seq.sequenceAnalysis(mode='standalone')
     seq.plotResults()

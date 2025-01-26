@@ -10,7 +10,7 @@ cd home/MRI/MaRGE
 
 #### 1.2 Activate the Virtual Environment
 ```
-conda activate marge
+source ./venv/bin/activate
 ```
 
 #### 1.2 Start the python script
@@ -18,12 +18,15 @@ conda activate marge
 python3 main.py
 ```
 
+
 ### 2. Fill in data from one's phantom  
 One can also leave this form without entries.
+
 
 ### 3. Start the main window  
 Press the house symbol.  
 <img src="house_start.png" alt="start" style="width: 40%;">
+
 
 ### 4. Connect and Initialise RedPitaya  
 
@@ -48,22 +51,22 @@ This will enable the GPA.
 <img src="init_power_modules.png" alt="init_power_modules" style="width: 100%;">  
 A message `READY: GPA init done!` will appeear in the console. Also, one will hear a sound from the sund simulator.
 
-### 5. Perform Autocalibration and Localizer Sequences  
 
+### 5. Perform Autocalibration and Localizer Sequences  
 First, it is recommended to perform an autocalibration. This will include a Lamor Frequency check, a Rabi Flops Sequence, and noise measurement. One does not need to worry about the error message from the AutoTuning Sequence — this is not required.  
 
 <img src="autocalibration.png" alt="autocalibration" style="width: 100%;">  
 In addition, a Localizer Sequence will help to produce scans of higher quality.  
 <img src="localizer.png" alt="localizer" style="width: 100%;">
 
+
 ### 6. Run Sequences
-Now, every sequence can be run by selecting from the dropdown menu on the left side and press the `Acquire` button.
+Now, every sequence can be run by selecting from the dropdown menu on the left side and press the `Acquire` button.  
 
-
+<img src="acquire.png" alt="acquire" style="width: 100%;">
 
 
 ## Axes orientation:
-
 Inside the sequences, there is always this section `Axes [rd, ph, sl]`.
 Here, one can define what type of scans gets created.  
 The axes of the MRI are orientated this way:  
@@ -90,7 +93,10 @@ If no gradients can be seen, try pressing "Init power modules" again. Sometimes 
 
 ### No larmor frequency
 The larmor frequence should be at around 16.55-16.65 MHz depending on the temperature in the room.  
-If no larmor can be found, try starting at one of these frequencies and run the sequencies iterative, by clicking the button right next to the `Acquire` button beforehand (The double error symbol). This will run the squence as long as one stops it and therefore may find the lamro frequency faster.   
+If no larmor can be found, try starting at one of these frequencies and run the sequencies iterative, by clicking the button right next to the `Acquire` button (The double error symbol) befoire clicking `Acquire`.  
+<img src="iterative.png" alt="iterative" style="width: 100%;">  
+
+This will run the squence as long as one stops it and therefore may find the larmor frequency faster.   
 One can also adjust the parameters and check with a higher bandwith for example. 
 
 In addition, check if by accident the shimming vector has changed. It should be by default at `[10.0, -10.0, 10.0]`.  

@@ -9,7 +9,9 @@
 # Z axis: 35 mT/m/o.u., 0.7 mT/m/A, 3.5 mT/m/V
 import numpy as np
 
-gFactor = [0.005, 0.005, 0.0035] # (X, Y, Z) in T/m/o.u.
+gFactor = [0.005, 0.005, 0.007] # (X, Y, Z) in T/m/o.u.
+scf = 7.3
+gFactor = [scf*0.05, scf*0.05, scf*0.07]
 max_slew_rate = 50e-3  # mT/m/ms
 grad_raster_time = 30e-6  # s
 grad_rise_time = 400e-6 # s, time for gradient ramps
@@ -21,7 +23,7 @@ oversamplingFactor = 6 # Rx oversampling
 maxRdPoints = 2**18 # Maximum number of points to be acquired by the red pitaya
 maxOrders = 2**14 # Maximum number of orders to be processed by the red pitaya
 deadTime = 400 # us, RF coil dead time
-b1Efficiency = np.pi/(0.5*110) # rads / (a.u. * us)
+b1Efficiency = np.pi/(0.5*110) # rads / (a.u. * us) Tabletop MRI
 larmorFreq = 16.64 # MHz
 cic_delay_points = 3 # to account for signal delay from red pitaya due to cic filter
 addRdPoints = 10 # to account for wrong first points after decimation
@@ -32,12 +34,12 @@ reference_time = 55  # us, reference excitation time to get the amplitude for ra
 fov = [20.0, 20.0, 20.0]
 dfov = [0.0, 0.0, 0.0]
 bash_path = "gnome-terminal" # use "gnome-terminal" for genome linux
-rp_ip_address = "10.42.0.211" # .249
+rp_ip_address = "10.42.0.249"
 rp_version = "rp-122"
 rp_max_input_voltage = 225  # mV
-lnaGain = 40 # dB
+lnaGain = 50 # dB
 rf_min_gain = 50  # dB  if your rf chain uses a fix gain, set this number equal to lnaGain
-rf_max_gain = 76  # dB, if your rf chain uses a fix gain, set this number equal to lnaGain
+rf_max_gain =50  # dB, if your rf chain uses a fix gain, set this number equal to lnaGain
 temperature = 293 # k
 shimming_factor = 1e-5
 

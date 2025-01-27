@@ -75,9 +75,9 @@ This means, one has to select certain axes as slicing axes (put in the last posi
 
 | Scan Type   | Slicing Axis   | variable   |
 |------------|------------|------------|
-| Coronal  | X  | 0  |
+| Coronal  | X  | 2  |
 | Transversal  | Y  | 1  |
-| Saggital  | Z  | 2  |
+| Saggital  | Z  | 0  |
 
 For example, to produce a transversal scan, the Axes input could look like this: `[2, 0, 1]`
 

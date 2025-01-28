@@ -3,19 +3,10 @@
 To produce the first scans using MaRGE, one has to follow these steps.
 
 ### 1. Start MaRGE software  
-#### 1.1 Navigate into the MaRGE folder
+#### 1.1 Open terminal and navigate into `~/home`
+#### 1.2 Run the shell script to open MaRGE
 ```
-cd home/MRI/MaRGE_v2
-```
-
-#### 1.2 Activate the Virtual Environment
-```
-source ./venv/bin/activate
-```
-
-#### 1.2 Start the python script
-```
-python3 main.py
+./start_MaRGE.sh
 ```
 
 

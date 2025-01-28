@@ -463,7 +463,7 @@ class ToolBarControllerPost(ToolBarWidgetPost):
             x_label = "X"
             y_label = "Y"
         elif axes[2] == 2:  # Sagittal
-            title = "Sagittal"
+            title = "Coronal"
             if axes[0] == 0 and axes[1] == 1:  # OK
                 matrix = np.flip(matrix, axis=2)
                 matrix = np.flip(matrix, axis=1)
@@ -476,7 +476,7 @@ class ToolBarControllerPost(ToolBarWidgetPost):
                 x_label = "(-Y) A | READOUT | P (+Y)"
                 y_label = "(-X) I | PHASE | S (+X)"
         elif axes[2] == 1:  # Coronal
-            title = "Coronal"
+            title = "Transversal"
             if axes[0] == 0 and axes[1] == 2:  # OK
                 matrix = np.flip(matrix, axis=2)
                 matrix = np.flip(matrix, axis=1)
@@ -491,7 +491,7 @@ class ToolBarControllerPost(ToolBarWidgetPost):
                 x_label = "(+Z) R | READOUT | L (-Z)"
                 y_label = "(-X) I | PHASE | S (+X)"
         elif axes[2] == 0:  # Transversal
-            title = "Transversal"
+            title = "Sagittal"
             if axes[0] == 1 and axes[1] == 2:
                 matrix = np.flip(matrix, axis=2)
                 matrix = np.flip(matrix, axis=1)

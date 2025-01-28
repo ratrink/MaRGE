@@ -869,7 +869,7 @@ class RARE_T2prep_pp(blankSeq.MRIBLANKSEQ):
             imageOrientation_dicom = [1.0, 0.0, 0.0, 0.0, 1.0, 0.0]
             if not self.unlock_orientation: # Image orientation
                 if self.axesOrientation[2] == 2:  # Sagittal
-                    title = "Sagittal"
+                    title = "Coronal"
                     if self.axesOrientation[0] == 0 and self.axesOrientation[1] == 1:  #OK
                         image = np.flip(image, axis=2)
                         image = np.flip(image, axis=1)
@@ -884,7 +884,7 @@ class RARE_T2prep_pp(blankSeq.MRIBLANKSEQ):
                         yLabel = "(-X) I | PHASE | S (+X)"
                         imageOrientation_dicom = [0.0, 1.0, 0.0, 0.0, 0.0, -1.0]
                 elif self.axesOrientation[2] == 1: # Coronal
-                    title = "Coronal"
+                    title = "Transversal"
                     if self.axesOrientation[0] == 0 and self.axesOrientation[1] == 2: #OK
                         image = np.flip(image, axis=2)
                         image = np.flip(image, axis=1)
@@ -901,7 +901,7 @@ class RARE_T2prep_pp(blankSeq.MRIBLANKSEQ):
                         yLabel = "(-X) I | PHASE | S (+X)"
                         imageOrientation_dicom = [1.0, 0.0, 0.0, 0.0, 0.0, -1.0]
                 elif self.axesOrientation[2] == 0:  # Transversal
-                    title = "Transversal"
+                    title = "Sagittal"
                     if self.axesOrientation[0] == 1 and self.axesOrientation[1] == 2:
                         image = np.flip(image, axis=2)
                         image = np.flip(image, axis=1)

@@ -5,7 +5,7 @@ To produce the first scans using MaRGE, one has to follow these steps.
 ### 1. Start MaRGE software  
 #### 1.1 Navigate into the MaRGE folder
 ```
-cd home/MRI/MaRGE
+cd home/MRI/MaRGE_v2
 ```
 
 #### 1.2 Activate the Virtual Environment
@@ -77,7 +77,7 @@ This means, one has to select certain axes as slicing axes (put in the last posi
 |------------|------------|------------|
 | Coronal  | X  | 2  |
 | Transversal  | Y  | 1  |
-| Saggital  | Z  | 0  |
+| Sagittal  | Z  | 0  |
 
 For example, to produce a transversal scan, the Axes input could look like this: `[2, 0, 1]`
 

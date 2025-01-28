@@ -1,0 +1,3 @@
+seqName,nScans,larmorFreq,rfExFA,rfReFA,rfExTime,rfReTime,repetitionTime,bw,dF,shimming
+LarmorInfo,Number of scans,Larmor frequency (MHz),Excitation flip angle (º),Refocusing flip angle (º),RF excitation time (us),RF refocusing time (us),Repetition time (ms),Bandwidth (kHz),Frequency resolution (Hz),Shimming
+Larmor,1,16.62247069822704,90.0,180.0,30.0,60.0,1000.0,150,100,"[10.0, -10.0, -10.0]"

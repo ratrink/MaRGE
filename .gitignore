@@ -17,3 +17,5 @@ ps_interpreter.log
 *.rar
 experiments/*
 seq/experiments/*
+./startRP.sh
+./controller/controller_toolbar_marcos.py

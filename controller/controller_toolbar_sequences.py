@@ -12,8 +12,8 @@ import time
 from datetime import datetime
 
 import numpy as np
-from PyQt5 import QtCore
-from PyQt5.QtWidgets import QLabel, QFileDialog
+from PyQt5.QtWidgets import QLabel, QFileDialog, QApplication
+from PyQt5.QtCore import QEvent, Qt  
 
 from controller.controller_plot3d import Plot3DController as Spectrum3DPlot
 from controller.controller_plot1d import Plot1DController as SpectrumPlot
@@ -28,6 +28,13 @@ class SequenceController(SequenceToolBar):
 
     Inherits from `SequenceToolBar`.
     """
+    class ReEnableEvent(QEvent):
+        """Custom event to re-enable the GUI."""
+        def __init__(self):
+            print("GUI ENABLED")
+            super().__init__(QEvent.Type(QEvent.User + 1))
+
+
     def __init__(self, *args, **kwargs):
         """
         Initialize the SequenceController object.
@@ -131,13 +138,18 @@ class SequenceController(SequenceToolBar):
             sequence output, updating parameters, displaying the output label, saving results to history, adding plots to
             the plot view, and optionally iterating the acquisition in a separate thread.
         """
+
+        # Disable the GUI
+        self.setEnabled(False)
+        print("GUI DISABLED")
+
         # Load sequence name
         if seq_name is None or seq_name is False:
             self.seq_name = self.main.sequence_list.getCurrentSequence()
         else:
             self.seq_name = seq_name
 
-        # Delete ouput if sequence is different from previous one
+        # Delete output if sequence is different from previous one
         if hasattr(self, "old_seq_name"):
             if self.seq_name != self.old_seq_name:
                 self.new_run = True
@@ -159,23 +171,26 @@ class SequenceController(SequenceToolBar):
         if self.new_run:
             self.new_run = False
 
-            # Update possible rotation, fov and dfov before the sequence is executed in parallel thread
+            # Update possible rotation, fov, and dfov before the sequence is executed in parallel thread
             defaultsequences[self.seq_name].sequenceAtributes()
 
             # Create and execute selected sequence
             if defaultsequences[self.seq_name].sequenceRun(0, self.main.demo):
+                # Disable the GUI
+                self.setEnabled(False)
+
                 # Delete previous plots
                 self.main.figures_layout.clearFiguresLayout()
 
-                # Create label with rawdata name
+                # Create label with raw data name
                 self.label = QLabel()
-                self.label.setAlignment(QtCore.Qt.AlignCenter)
-                self.label.setStyleSheet("background-color: black;color: white")
+                self.label.setAlignment(Qt.AlignCenter)
+                self.label.setStyleSheet("background-color: black; color: white")
                 self.main.figures_layout.addWidget(self.label, row=0, col=0, colspan=2)
             else:
                 return 0
 
-            # Do sequence analysis and acquire de plots
+            # Do sequence analysis and acquire the plots
             self.old_out = defaultsequences[self.seq_name].sequenceAnalysis()
 
             # Update parameters, just in case something changed
@@ -195,9 +210,10 @@ class SequenceController(SequenceToolBar):
 
             # Save results into the history
             self.main.history_list.outputs[self.main.history_list.current_output] = self.old_out
-            self.main.history_list.inputs[self.main.history_list.current_output] = \
-                [list(defaultsequences[self.seq_name].mapNmspc.values()),
-                 list(defaultsequences[self.seq_name].mapVals.values())]
+            self.main.history_list.inputs[self.main.history_list.current_output] = [
+                list(defaultsequences[self.seq_name].mapNmspc.values()),
+                list(defaultsequences[self.seq_name].mapVals.values())
+            ]
 
             # Save the rotation and shifts to the history list
             self.main.history_list.rotations[self.main.history_list.current_output] = \
@@ -207,42 +223,51 @@ class SequenceController(SequenceToolBar):
             self.main.history_list.fovs[self.main.history_list.current_output] = \
                 defaultsequences[self.seq_name].fovs.copy()
 
-            # Add plots to the plotview_layout
+            # Add plots to the plot view layout
             self.plots = []
             n_columns = 1
             for item in self.old_out:
-                if item['col']+1 > n_columns:
-                    n_columns = item['col']+1
+                if item['col'] + 1 > n_columns:
+                    n_columns = item['col'] + 1
                 if item['widget'] == 'image':
-                    image = Spectrum3DPlot(main=self.main,
-                                           data=item['data'],
-                                           x_label=item['xLabel'],
-                                           y_label=item['yLabel'],
-                                           title=item['title'])
+                    image = Spectrum3DPlot(
+                        main=self.main,
+                        data=item['data'],
+                        x_label=item['xLabel'],
+                        y_label=item['yLabel'],
+                        title=item['title']
+                    )
                     self.main.figures_layout.addWidget(image, row=item['row'] + 1, col=item['col'])
                     defaultsequences[self.seq_name].deleteOutput()
                 elif item['widget'] == 'curve':
-                    self.plots.append(SpectrumPlot(x_data=item['xData'],
-                                                   y_data=item['yData'],
-                                                   legend=item['legend'],
-                                                   x_label=item['xLabel'],
-                                                   y_label=item['yLabel'],
-                                                   title=item['title']))
+                    self.plots.append(SpectrumPlot(
+                        x_data=item['xData'],
+                        y_data=item['yData'],
+                        legend=item['legend'],
+                        x_label=item['xLabel'],
+                        y_label=item['yLabel'],
+                        title=item['title']
+                    ))
                     self.main.figures_layout.addWidget(self.plots[-1], row=item['row'] + 1, col=item['col'])
             self.main.figures_layout.addWidget(self.label, row=0, col=0, colspan=n_columns)
 
-            # Iterate in parallel thread (only for 1d plots)
+            # Iterate in parallel thread (only for 1D plots)
             if self.action_iterate.isChecked() and hasattr(defaultsequences[self.seq_name], 'output'):
                 thread = threading.Thread(target=self.repeatAcquisition)
                 thread.start()
+                thread.join()  # Wait for completion
+                QApplication.instance().postEvent(self, self.ReEnableEvent())
 
-            # Deactivate the iterative buttom if sequence is not iterable (2d and 3d plots)
+            # Deactivate the iterative button if sequence is not iterable (2D and 3D plots)
             if not hasattr(defaultsequences[self.seq_name], 'output') and self.action_iterate.isChecked():
                 self.action_iterate.toggle()
 
         else:
             thread = threading.Thread(target=self.repeatAcquisition)
             thread.start()
+            thread.join()
+            QApplication.instance().postEvent(self, self.ReEnableEvent())
+                
 
     def runToList(self, seq_name=None, item_name=None, map_nmspc=None, map_vals=None):
         """

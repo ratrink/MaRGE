@@ -1823,7 +1823,7 @@ class MRIBLANKSEQ:
         y_label = "%s axis" % axes_str[0]
         title = "Image"
         if axes[2] == 2:  # Sagittal
-            title = "Sagittal"
+            title = "Coronal"
             if axes[0] == 0 and axes[1] == 1:
                 image = np.flip(image, axis=0)
                 x_label = "(-Y) A | PHASE | P (+Y)"
@@ -1836,7 +1836,7 @@ class MRIBLANKSEQ:
                 y_label = "(-X) I | PHASE | S (+X)"
                 image_orientation_dicom = [0.0, 1.0, 0.0, 0.0, 0.0, -1.0]
         elif axes[2] == 1:  # Coronal
-            title = "Coronal"
+            title = "Transversal"
             if axes[0] == 0 and axes[1] == 2:
                 x_label = "(+Z) R | PHASE | L (-Z)"
                 y_label = "(-X) I | READOUT | S (+X)"
@@ -1847,7 +1847,7 @@ class MRIBLANKSEQ:
                 y_label = "(-X) I | PHASE | S (+X)"
                 image_orientation_dicom = [1.0, 0.0, 0.0, 0.0, 0.0, -1.0]
         elif axes[2] == 0:  # Transversal
-            title = "Transversal"
+            title = "Sagittal"
             if axes[0] == 1 and axes[1] == 2:
                 image = np.flip(image, axis=0)
                 x_label = "(+Z) R | PHASE | L (-Z)"

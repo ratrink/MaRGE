@@ -1,16 +1,9 @@
 __pycache__/
 sphinx/_build/
 *.py[cod]
-experiments
-calibration
-protocols
 .idea/
-configs/units.py
-configs/hw_config.py
 *.dcm
 *.pptx
-configs/sys_config.py
-configs/autotuning.py
 venv/
 marcos_fpga_rp-122.bit
 marcos_fpga_rp-122.bit.bin
@@ -20,6 +13,9 @@ autotuning/autotuning_arduino/autotuning_arduino.ino
 *.seq
 *.log
 ps_interpreter.log
-sequence.seq
 *.mat
 *.rar
+experiments/*
+seq/experiments/*
+./startRP.sh
+./controller/controller_toolbar_marcos.py

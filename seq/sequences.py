@@ -34,8 +34,6 @@ import seq.fix_gain as fix_gain
 import seq.mse_pp as mse_pp
 import seq.mse_pp_jma as mse_jma
 import seq.rare_t2prep_pp as rare_t2prep_pp
-import seq.tse_raph as tse_raph
-
 """
 Definition of default sequences
 """
@@ -64,10 +62,9 @@ defaultsequences = {
     'TSE': tse.TSE(),
     'EDDYCURRENTS': eddycurrents.EDDYCURRENTS(),
     'InversionRecovery': inversionRecovery.InversionRecovery(),
-    'SWEEP': sweep.SweepImage(),
+    # 'SWEEP': sweep.SweepImage(),
     'Larmor Raw': larmor_raw.LarmorRaw(),
     'MSE': mse.MSE(),
     'MSE_PyPulseq': mse_pp.MSE(),
     'Larmor PyPulseq': larmor_pypulseq.LarmorPyPulseq(),
-    'RTSE': tse_raph.TSE(),
 }

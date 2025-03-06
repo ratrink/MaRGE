@@ -566,7 +566,7 @@ class GRE3D(blankSeq.MRIBLANKSEQ):
 
             if not self.unlock_orientation:  # Image orientation
                 if self.axesOrientation[2] == 2:  # Sagittal
-                    title = "Sagittal"
+                    title = "Coronal"
                     if self.axesOrientation[0] == 0 and self.axesOrientation[1] == 1:  # OK
                         image = np.flip(image, axis=2)
                         image = np.flip(image, axis=1)
@@ -579,7 +579,7 @@ class GRE3D(blankSeq.MRIBLANKSEQ):
                         xLabel = "(-Y) A | READOUT | P (+Y)"
                         yLabel = "(-X) I | PHASE | S (+X)"
                 elif self.axesOrientation[2] == 1:  # Coronal
-                    title = "Coronal"
+                    title = "Transversal"
                     if self.axesOrientation[0] == 0 and self.axesOrientation[1] == 2:  # OK
                         image = np.flip(image, axis=2)
                         image = np.flip(image, axis=1)
@@ -594,7 +594,7 @@ class GRE3D(blankSeq.MRIBLANKSEQ):
                         xLabel = "(+Z) R | READOUT | L (-Z)"
                         yLabel = "(-X) I | PHASE | S (+X)"
                 elif self.axesOrientation[2] == 0:  # Transversal
-                    title = "Transversal"
+                    title = "Sagittal"
                     if self.axesOrientation[0] == 1 and self.axesOrientation[1] == 2:
                         image = np.flip(image, axis=2)
                         image = np.flip(image, axis=1)

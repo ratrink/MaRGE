@@ -650,7 +650,7 @@ class RAREProtocols(blankSeq.MRIBLANKSEQ):
             # Image orientation
             imageOrientation_dicom = [1.0, 0.0, 0.0, 0.0, 1.0, 0.0]
             if self.axesOrientation[2] == 2:  # Sagital
-                title = "Sagittal"
+                title = "Coronal"
                 if self.axesOrientation[0] == 0 and self.axesOrientation[1] == 1:  # OK
                     image = np.flip(image, axis=2)
                     image = np.flip(image, axis=1)
@@ -665,7 +665,7 @@ class RAREProtocols(blankSeq.MRIBLANKSEQ):
                     yLabel = "I | PHASE | S"
                     imageOrientation_dicom = [0.0, 1.0, 0.0, 0.0, 0.0, -1.0]
             if self.axesOrientation[2] == 1:  # Coronal
-                title = "Coronal"
+                title = "Transversal"
                 if self.axesOrientation[0] == 0 and self.axesOrientation[1] == 2:  # OK
                     image = np.flip(image, axis=2)
                     image = np.flip(image, axis=1)
@@ -682,7 +682,7 @@ class RAREProtocols(blankSeq.MRIBLANKSEQ):
                     yLabel = "I | PHASE | S"
                     imageOrientation_dicom = [1.0, 0.0, 0.0, 0.0, 0.0, -1.0]
             if self.axesOrientation[2] == 0:  # Transversal
-                title = "Transversal"
+                title = "Sagittal"
                 if self.axesOrientation[0] == 1 and self.axesOrientation[1] == 2:
                     image = np.flip(image, axis=2)
                     image = np.flip(image, axis=1)
